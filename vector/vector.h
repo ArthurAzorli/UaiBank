@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-#include "../int_util.h"
+#include "../util/int_util.h"
 
 struct vector_struct {
   void *data;
@@ -10,11 +10,11 @@ struct vector_struct {
 
 typedef struct vector_struct Vector;
 
-bool push_back(Vector* vector, void *value);
+bool push_back(Vector* vector, const void *value);
 
 void *pop_back(Vector* vector);
 
-void *remove_value(Vector* vector, uint64 index);
+void *remove_value(Vector* vector, const uint64 index);
 
 uint64 search_value(const Vector* vector, const void *value);
 
