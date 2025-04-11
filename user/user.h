@@ -3,6 +3,9 @@
 
 #include "../util/int_util.h"
 
+static uint64 NEXT_ID = 0x0;
+static const char* ID_PATH = "../id.txt";
+
 struct user_struct {
     uint64 id;
     char name[101];
@@ -11,10 +14,12 @@ struct user_struct {
 };
 typedef struct user_struct User;
 
-void user_init(User *user);
+void init_user(User *user, char *name, uint8 age);
 
-void bankTransfer(User *sender, User *receiver, double amount);
+bool bankTransfer(User *sender, User *receiver, double amount);
 
-void user_free(User *user);
+void load_id();
+
+void save_id();
 
 #endif //USER_H
