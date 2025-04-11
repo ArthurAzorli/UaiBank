@@ -32,7 +32,7 @@ int main() {
     setlocale(LC_ALL, "Portuguese");
     system("color 07");
 
-    load_file_data(&bd);
+    carregar_banco();
 
     uint8 option;
     do {
@@ -60,7 +60,6 @@ int main() {
             }
             case '3': {
                 deletar_usuario();
-                create_file_data(&bd);
                 break;
             }
             case '4': {
@@ -68,18 +67,15 @@ int main() {
                 break;
             }
             case '5': {
-                transferencia();
-                create_file_data(&bd);
+                transferencia();;
                 break;
             }
             case '6': {
                 deposito();
-                create_file_data(&bd);
                 break;
             }
             case '7': {
                 saque();
-                create_file_data(&bd);
                 break;
             }
             case '8': {
@@ -88,7 +84,7 @@ int main() {
             }
             case '9': {
                 printf("Finalizando Sistema...\n");
-                create_file_data(&bd);
+                salvar_banco();
                 successful_message("Finalizacao Concluida!\n");
                 break;
             }

@@ -3,9 +3,14 @@
 
 #include "../user/user.h"
 #include "../vector/vector.h"
+
 #include <stdio.h>
 
 static Vector bd = {NULL, 0, sizeof(User)};
+
+void carregar_banco();
+
+void salvar_banco();
 
 bool cadastrar_usuario(User* user);
 

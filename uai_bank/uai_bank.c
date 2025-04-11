@@ -4,6 +4,14 @@
 
 #include "../util/file_util.h"
 
+void carregar_banco() {
+    load_file_data(&bd);
+}
+
+void salvar_banco() {
+    create_file_data(&bd);
+}
+
 /**
  * @brif: trata do cadastro de um usuario, incluindo entrada e saida
  * @param user: ponteiro ao qual sera direcionado o valor resposta do usuario cadastrado
@@ -128,6 +136,7 @@ void deletar_usuario() {
     } else {
         error_message("usuario inexistente!");
     }
+    create_file_data(&bd);
 }
 
 /**
@@ -184,6 +193,7 @@ void transferencia() {
     } else {
         error_message("Houve um erro durante a Transferencia!");
     }
+    create_file_data(&bd);
 }
 
 /**
@@ -205,6 +215,7 @@ void deposito() {
 
     user->balance += value;
     successful_message("Deposito realizado com sucesso!");
+    create_file_data(&bd);
 }
 
 /**
@@ -230,6 +241,7 @@ void saque() {
         successful_message("Saldo realizado com sucesso!");
         user->balance -= value;
     }
+    create_file_data(&bd);
 }
 
 /**
