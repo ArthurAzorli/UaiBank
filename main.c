@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 #include "uai_bank/uai_bank.h"
-#include "util/file_util.h"
 #include "util/io_util.h"
 
 void print_menu() {
@@ -25,7 +24,6 @@ void print_menu() {
     printf("| [9] Sair                                        |\n");
     printf("|-------------------------------------------------|\n\n");
     printf("| Digite a opcao desejada: ");
-
 }
 
 int main() {
@@ -34,11 +32,11 @@ int main() {
 
     carregar_banco();
 
-    uint8 option;
+    int option;
     do {
 
         print_menu();
-        option = (uint8) getchar();
+        option = getchar();
 
         if (clearBuffer()) {
             error_message("Entrada excede limite de caracteres!\n");
@@ -46,16 +44,15 @@ int main() {
             continue;
         }
 
+        printf("\n");
+
         switch (option) {
             case '1': {
-                User newUser;
-                if (cadastrar_usuario(&newUser)) {
-                    save_user_data(&newUser);
-                }
+                cadastrar_usuario();
                 break;
             }
             case '2': {
-
+                cadastrar_usuarios();
                 break;
             }
             case '3': {

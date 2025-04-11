@@ -12,7 +12,9 @@ void carregar_banco();
 
 void salvar_banco();
 
-bool cadastrar_usuario(User* user);
+void cadastrar_usuario();
+
+void cadastrar_usuarios();
 
 void deletar_usuario();
 

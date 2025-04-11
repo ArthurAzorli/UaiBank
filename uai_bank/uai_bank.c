@@ -14,20 +14,19 @@ void salvar_banco() {
 
 /**
  * @brif: trata do cadastro de um usuario, incluindo entrada e saida
- * @param user: ponteiro ao qual sera direcionado o valor resposta do usuario cadastrado
- * @return: valor booleano indicando se o cadastro foi bem sucedido (TRUE) ou nao (FALSE)
- * @warning: o usuario cadastrado já é incluido no vetor de usuairos
  */
-bool cadastrar_usuario(User* user) {
+void cadastrar_usuario() {
 
-    printf("\n\n |---Cadastrar usuario---|\n");
+    printf("|---Cadastrar usuario---|\n");
+
+    User user;
 
     char name[101];
     uint8 age;
     double balance;
 
     while (true) {
-        printf("Digite o nome completo do usuario: ");
+        printf("| Digite o nome completo do usuario: ");
 
         if (!fgets(name, 101, stdin)) {
             error_message("ocorreu um erro ao ler o nome do usuario!");
@@ -45,23 +44,23 @@ bool cadastrar_usuario(User* user) {
     }
 
     while (true) {
-        printf("Digite a idade do usuário: ");
-        age = getchar();
+        printf("Digite a idade do usuario: ");
+        age = scanf("%u", &user.age);
 
         if (clearBuffer() ||age>120 || age<0) {
-            error_message("Idade inválida!");
+            error_message("Idade invalida!");
             printf("Tente novamente -> ");
             continue;
         }
 
         if (age<16) {
             error_message("Somete pessoas acima de 16 anos podem criar uma conta!");
-            return false;
+            return;
         }
         break;
     }
 
-    init_user(user, name, age);
+    init_user(&user, name, age);
 
     bool init_balance = false;
     while (true) {
@@ -108,12 +107,40 @@ bool cadastrar_usuario(User* user) {
 
             break;
         }
-        user->balance = balance;
+        user.balance = balance;
     }
 
-    push_back(&bd, user);
+    push_back(&bd, &user);
+    save_user_data(&user);
     successful_message("Usuario criado com sucessso!");
-    return true;
+}
+
+void cadastrar_usuarios() {
+
+    uint8 quantity;
+
+    while (true) {
+        printf("| Digite a quntidade de usuarios desejadados (Maximo 10): ");
+        quantity = getchar();
+
+        if (clearBuffer()) {
+            error_message("Quantidade inválida!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        if (quantity>10) {
+            error_message("Execedeu o limite de 10 usuarios por vez!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+        break;
+    }
+
+    for (uint8 i = 0; i<quantity; i++) {
+        cadastrar_usuario();
+        printf("|-------------------------------------------------|\n");
+    }
 }
 
 /**
