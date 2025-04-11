@@ -9,5 +9,9 @@ add_executable(UaiBank
         util/file_util.h util/file_util.c
         util/int_util.h
         main.c
+        util/io_util.h
+        util/io_util.c
+        uai_bank/uai_bank.h
+        uai_bank/uai_bank.c
 )
 

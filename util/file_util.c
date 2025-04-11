@@ -3,8 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief: carrega a lista de usuarios salvos nos arquivos
+ * @param vector: vetor de usuarios onde serao salvos
+ */
 void load_file_data(Vector *vector) {
-    FILE *file = fopen(FILE_PATH, "r");
+    FILE *file = fopen(FILE_DATA_PATH, "r");
     if (!file) return;
 
     vector->element_size = sizeof(User);
@@ -31,16 +35,18 @@ void load_file_data(Vector *vector) {
         if (token == NULL) break;
         user.balance = strtod(token, NULL);
 
-        printf("%llx, %s, %d, %.2lf\n", user.id, user.name, user.age, user.balance);
-
         push_back(vector, &user);
     }
     fclose(file);
 }
 
+/**
+ * @brief: cria/reescreve o arquivo onde serão salvos os dados dos usuarios
+ * @param vector: vetor com os dados dos usuarios
+ */
 void create_file_data(const Vector *vector) {
 
-    FILE *file = fopen(FILE_PATH, "w");
+    FILE *file = fopen(FILE_DATA_PATH, "w");
     if (!file) return;
 
     if (vector && vector->data) {
@@ -54,9 +60,13 @@ void create_file_data(const Vector *vector) {
     fclose(file);
 }
 
+/**
+ * @brief: adiciona uma nova linha de dados de um usuario
+ * @param user: ponteiro de usuario com os dados a serem salvos
+ */
 void save_user_data(const User *user) {
 
-    FILE *file = fopen(FILE_PATH, "a");
+    FILE *file = fopen(FILE_DATA_PATH, "a");
     if (!file) return;
 
     fprintf(file, "%llx%s%s%s%d%s%.2lf\n",
