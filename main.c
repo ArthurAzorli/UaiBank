@@ -34,7 +34,6 @@ int main() {
 
     int option;
     do {
-
         print_menu();
         option = getchar();
 
@@ -91,6 +90,7 @@ int main() {
             }
         }
         press_enter();
+        printf("%c", option);
     }
     while (option != '9');
     return 0;

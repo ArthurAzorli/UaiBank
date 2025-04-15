@@ -6,12 +6,12 @@
  * @return: valor booleano indicando se foi preciso limpar (TRUE) ou não (FALSE)
  */
 bool clearBuffer() {
-    int c = getchar();
-    if (c != '\n' && c != EOF) {
-        while ((c = getchar()) != '\n' && c != EOF){}
-        return true;
+    int c;
+    bool result = false;
+    while ((c = getchar()) != '\n' && c != EOF) {
+        result = true;
     }
-    return false;
+    return result;
 }
 
 /**
@@ -20,7 +20,6 @@ bool clearBuffer() {
  */
 void error_message(char *message) {
     printf("\x1b[31mErro: %s\n\e[0;37m", message);
-
 }
 
 /**

@@ -13,6 +13,7 @@
 void init_user(User *user, char *name, uint8 age) {
     if (NEXT_ID == 0) load_id();
     user->id = NEXT_ID;
+    printf("nome: %s\n", name);
     strcpy(user->name, name);
     user->age = age;
     user->balance = 0;
@@ -59,5 +60,9 @@ void save_id() {
     if (!file) return;
     fprintf(file, "%llx\n", NEXT_ID);
     fclose(file);
+}
+
+uint64 getNextID() {
+    return NEXT_ID;
 }
 

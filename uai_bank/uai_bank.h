@@ -34,6 +34,6 @@ uint64 selecionar_usuario(char* title);
 
 bool existe_usuario(uint64);
 
-User* getUserFromVector(Vector* , uint16 index);
+User* getUserFromVector(Vector* , const uint16 index);
 
 #endif //UAI_BANK_H

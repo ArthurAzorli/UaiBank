@@ -22,4 +22,6 @@ void load_id();
 
 void save_id();
 
+uint64 getNextID();
+
 #endif //USER_H
