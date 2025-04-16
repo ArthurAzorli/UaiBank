@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * @brief: adiciona um novo valor em um vetor
- * @param vector: ponteiro do vetor ao qual o valor será adicionado
- * @param value: ponteiro do valor que será adicionado no vetor
- * @return: valor booleano indicando se adição ocorreu com sucesso (TRUE) ou não (FALSE)
- */
 bool push_back(Vector* vector, const void *value) {
 
     if (!vector) return false;
@@ -34,11 +28,6 @@ bool push_back(Vector* vector, const void *value) {
 
 }
 
-/**
- * @brief: remove o ultimo valor de um vetor, tratando se não há valores nele
- * @param vector: ponteiro do vetor que será removido o valor
- * @return: ponteiro do valor removido
- */
 void * pop_back(Vector* vector) {
 
     if (!vector->data || vector->size == 0) {
@@ -62,12 +51,6 @@ void * pop_back(Vector* vector) {
     return oldValue;
 }
 
-/**
- * @brief: remove um valor em especifico de um vetor
- * @param vector: ponteiro do valor ao qual o valor será removido
- * @param index: index ao qual o valor se encontra
- * @return: ponteiro do valor removido
- */
 void * remove_value(Vector* vector, const uint64 index) {
 
     if (!vector->data || vector->size == 0 ||index >= vector->size) {
@@ -99,13 +82,6 @@ void * remove_value(Vector* vector, const uint64 index) {
 
 }
 
-/**
- * @brief: busca por um valor em espefico dentro de um vetor
- * @param vector: ponteiro do vetor a ser vasculhado
- * @param value: ponteiro do valor a ser procurado
- * @warning: caso não haja o valor no vetor, retorna o tamanho do vetor
- * @return: index do valor
- */
 uint64 search_value(const Vector* vector, const void *value) {
     for (uint64 i = 0; i < vector->size; i++) {
         if (memcmp((char*)vector->data + i * vector->element_size, value, vector->element_size) == 0)
@@ -115,12 +91,6 @@ uint64 search_value(const Vector* vector, const void *value) {
     return vector->size;
 }
 
-/**
- * @brief: verifica se um determinado valor existe em um vetor
- * @param vector: ponteiro do valor a ser vasculhado
- * @param value: valor a ser ver verificado
- * @return: valor booleano indicando se o valor foi encontrado (TRUE) ou não (FALSE)
- */
 bool contains(const Vector* vector, const void *value) {
     for (uint64 i = 0; i < vector->size; i++) {
         if (memcmp((char*)vector->data + i * vector->element_size, value, vector->element_size) == 0)
@@ -129,60 +99,8 @@ bool contains(const Vector* vector, const void *value) {
     return false;
 }
 
-/**
- * @brief: limpa os dados do vetor
- * @param vector: ponteiro do vetor a ser limpo
- * @warning: não retira o valor do tamanho do elemento
- */
 void clear(Vector *vector) {
     free(vector->data);
     vector->data = NULL;
     vector->size = 0;
 }
-
-/*
-int testVector() {
-
-    Vector vector = {NULL, 0, sizeof(uint16)};
-
-    uint16 value1 = 10;
-    uint16 value2 = 20;
-    uint16 value3 = 30;
-    uint16 value4 = 40;
-
-    if (push_back(&vector, &value1)) printf("valor 1 adicionado com sucesso!\n");
-    if (push_back(&vector, &value2)) printf("valor 2 adicionado com sucesso!\n");
-    if (push_back(&vector, &value3)) printf("valor 3 adicionado com sucesso!\n");
-
-    for (uint64 i = 0; i < vector.size; i++) {
-        uint16 value = *((uint16*)(vector.data) + i);
-        printf("O valor no indice %llu eh: %d\n", i, value);
-    }
-
-    uint16 valorRemovido = *(uint16*) pop_back(&vector);
-    printf("O valor removido eh: %d\n", valorRemovido);
-
-    for (uint64 i = 0; i < vector.size; i++) {
-        uint16 value = *((uint16*)(vector.data) + i);
-        printf("O valor no indice %llu eh: %d\n", i, value);
-    }
-
-    printf("Tem o valor 20? %d \n", contains(&vector, &value2));
-    printf("Tem o valor 30? %d \n", contains(&vector, &value3));
-
-    printf("Onde esta o valor 20? %lld \n", search_value(&vector, &value2));
-    printf("Onde esta o valor 40? %lld \n", search_value(&vector, &value4));
-
-    uint16 valorRemovido1 = *(uint16*) remove_value(&vector, 0);
-    printf("O valor removido no index 0 eh: %d\n", valorRemovido1);
-
-    for (uint64 i = 0; i < vector.size; i++) {
-        uint16 value = *((uint16*)(vector.data) + i);
-        printf("O valor no indice %llu eh: %d\n", i, value);
-    }
-
-    clear(&vector);
-
-    return 0;
-}
- */

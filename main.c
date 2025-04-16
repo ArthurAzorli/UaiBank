@@ -7,7 +7,8 @@
 
 void print_menu() {
 
-    printf("\n|=================================================|\n");
+    printf("\n");
+    printf("|=================================================|\n");
     printf("|                                                 |\n");
     printf("|              Bem Vindo ao Uai Bank              |\n");
     printf("|                                                 |\n");
@@ -90,7 +91,6 @@ int main() {
             }
         }
         press_enter();
-        printf("%c", option);
     }
     while (option != '9');
     return 0;

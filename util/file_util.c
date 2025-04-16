@@ -3,10 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/**
- * @brief: carrega a lista de usuarios salvos nos arquivos
- * @param vector: vetor de usuarios onde serao salvos
- */
 void load_file_data(Vector *vector) {
     FILE *file = fopen(FILE_DATA_PATH, "r");
     if (!file) return;
@@ -40,10 +36,6 @@ void load_file_data(Vector *vector) {
     fclose(file);
 }
 
-/**
- * @brief: cria/reescreve o arquivo onde serão salvos os dados dos usuarios
- * @param vector: vetor com os dados dos usuarios
- */
 void create_file_data(const Vector *vector) {
 
     FILE *file = fopen(FILE_DATA_PATH, "w");
@@ -60,10 +52,6 @@ void create_file_data(const Vector *vector) {
     fclose(file);
 }
 
-/**
- * @brief: adiciona uma nova linha de dados de um usuario
- * @param user: ponteiro de usuario com os dados a serem salvos
- */
 void save_user_data(const User *user) {
 
     FILE *file = fopen(FILE_DATA_PATH, "a");

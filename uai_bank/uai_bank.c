@@ -14,9 +14,6 @@ void salvar_banco() {
     create_file_data(&bd);
 }
 
-/**
- * @brif: trata do cadastro de um usuario, incluindo entrada e saida
- */
 void cadastrar_usuario() {
 
     printf("|---Cadastrar usuario---|\n\n");
@@ -165,10 +162,6 @@ void cadastrar_multiplos_usuarios() {
 
 }
 
-/**
- * @brief: delata um usuario selecionado por id
- * @warning: já remove o usuario do vetor de usuarios
- */
 void deletar_usuario() {
 
     printf("|---Deletar usuario---|\n\n");
@@ -188,9 +181,6 @@ void deletar_usuario() {
     create_file_data(&bd);
 }
 
-/**
- * @brief: realiza a busca do usuario e informa seus dados
- */
 void buscar_usuario() {
 
     printf("|---Busca de Usuario---|\n\n");
@@ -212,9 +202,6 @@ void buscar_usuario() {
     }
 }
 
-/**
- * @brief: trata da entrada, processamento e validação do procedimento de transferencia
- */
 void transferencia() {
 
     printf("|---Transferencia---|\n\n");
@@ -245,9 +232,6 @@ void transferencia() {
     create_file_data(&bd);
 }
 
-/**
- * @brief: trata da entrada, processamento e validação do procedimento de deposito
- */
 void deposito() {
 
     printf("|---Deposito---|\n\n");
@@ -267,9 +251,6 @@ void deposito() {
     create_file_data(&bd);
 }
 
-/**
- * @brief: trata da entrada, processamento e validação do procedimento de saque
- */
 void saque() {
     printf("|---Saque---|\n\n");
 
@@ -293,12 +274,6 @@ void saque() {
     create_file_data(&bd);
 }
 
-/**
- * @brief: trata da leitura de valores monetarios
- * @param title: texto a ser exibido quando solicitado o valor
- * @warning: valor maximo de leitura de 8 bytes
- * @return: valor monetario lido
- */
 double ler_valor(char* title) {
     while (true) {
 
@@ -324,10 +299,6 @@ double ler_valor(char* title) {
     }
 }
 
-/**
- * @brief: trata da entrada de id, incluindo validação
- * @return: valor do id lido
- */
 uint64 ler_id() {
     while (true) {
         setbuf(stdin, NULL);
@@ -355,11 +326,6 @@ uint64 ler_id() {
     }
 }
 
-/**
- * @brief: trata da seleção do usuário, inclundo entrada e validação
- * @param title: texto a ser exibido ao solicitar a seleção
- * @return: caso não haja um erro, retorna o tamanho do vetor de usuarios;
- */
 uint64 selecionar_usuario(char* title) {
 
     if (bd.size == 0) {
@@ -385,11 +351,6 @@ uint64 selecionar_usuario(char* title) {
     return bd.size;
 }
 
-/**
- * @brief: verifica se existe um usuario com um id especifico
- * @param id: id do usuario a ser verificado
- * @return: valor boolean indicando se existe o usuario (TRUE) ou nao (FALSE)
- */
 bool existe_usuario(const uint64 id) {
     bool exist = false;
     for (uint64 i = 0; i < bd.size; i++) {
@@ -402,12 +363,6 @@ bool existe_usuario(const uint64 id) {
     return exist;
 }
 
-/**
- * @brief: realiza o get e cast do valor de vetor de usuarios
- * @param vector: vetor de usuários
- * @param index: index a ser pego o valor
- * @return: ponteiro do valor do usuario em questão
- */
 User* getUserFromVector(Vector* vector, const uint16 index) {
     if (!vector || !vector->data) return NULL;
     return ((User*)vector->data) + index;

@@ -4,16 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 
-/**
- * @brief: inicializa a struct User
- * @param user: ponteiro ao qual od dados serão salvaos
- * @param name: string do nome do usuario
- * @param age: idade do usuario
- */
 void init_user(User *user, char *name, uint8 age) {
     if (NEXT_ID == 0) load_id();
     user->id = NEXT_ID;
-    printf("nome: %s\n", name);
     strcpy(user->name, name);
     user->age = age;
     user->balance = 0;
@@ -21,14 +14,7 @@ void init_user(User *user, char *name, uint8 age) {
     save_id();
 }
 
-/**
- * @brief: trata da transferecia de valor entre usuarios
- * @param sender: usuario que enviara a quantia
- * @param receiver: usuario que recebera a quantia
- * @param value: valor que será transferido
- * @return: valor booleano indicando se a transferencia foi bem sucedida
- */
-bool bankTransfer(User *sender, User *receiver, double value) {
+bool bankTransfer(User *sender, User *receiver, const double value) {
 
     if (!sender || !receiver) return false;
     if (sender->id == receiver->id) return false;
@@ -39,9 +25,6 @@ bool bankTransfer(User *sender, User *receiver, double value) {
     return true;
 }
 
-/**
- * @brief: carrega o ultimo id gerado
- */
 void load_id() {
     FILE *file = fopen(ID_PATH, "r");
     if (!file) return;
@@ -52,9 +35,6 @@ void load_id() {
     fclose(file);
 }
 
-/**
- * @brief: salva o ultimo id gerado
- */
 void save_id() {
     FILE *file = fopen(ID_PATH, "w");
     if (!file) return;
@@ -65,4 +45,3 @@ void save_id() {
 uint64 getNextID() {
     return NEXT_ID;
 }
-
