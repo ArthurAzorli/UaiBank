@@ -51,7 +51,7 @@ int main() {
                 break;
             }
             case '2': {
-                cadastrar_usuarios();
+                cadastrar_multiplos_usuarios();
                 break;
             }
             case '3': {

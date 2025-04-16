@@ -14,7 +14,7 @@ void salvar_banco();
 
 void cadastrar_usuario();
 
-void cadastrar_usuarios();
+void cadastrar_multiplos_usuarios();
 
 void deletar_usuario();
 
@@ -32,7 +32,7 @@ uint64 ler_id();
 
 uint64 selecionar_usuario(char* title);
 
-bool existe_usuario(uint64);
+bool existe_usuario(const uint64);
 
 User* getUserFromVector(Vector* , const uint16 index);
 

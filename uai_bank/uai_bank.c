@@ -19,13 +19,12 @@ void salvar_banco() {
  */
 void cadastrar_usuario() {
 
-    printf("|---Cadastrar usuario---|\n");
+    printf("|---Cadastrar usuario---|\n\n");
 
     User user;
 
     char name[101];
     uint8 age;
-    double balance;
 
     while (true) {
         printf("| Digite o nome completo do usuario: ");
@@ -59,7 +58,7 @@ void cadastrar_usuario() {
 
         char input[3];
         printf("| Digite a idade do usuario: ");
-        if (!scanf("%s", &input)) {
+        if (!scanf("%[^\n]s", &input)) {
             error_message("ocorreu um erro ao ler a idade do usuario!");
             printf("Tente novamente -> ");
             continue;
@@ -115,21 +114,7 @@ void cadastrar_usuario() {
     }
 
     if (init_balance) {
-
-        while (true) {
-            setbuf(stdin, NULL);
-            printf("| Digite o valor do saldo (separado com virgula): R$ ");
-            scanf("%lf", &balance);
-
-            if (clearBuffer() || 0>balance) {
-                error_message("Saldo invalido!");
-                printf("Tente novamente -> ");
-                continue;
-            }
-
-            break;
-        }
-        user.balance = balance;
+        user.balance = ler_valor("| Digite o valor do saldo (separado com virgula): R$ ");
     }
 
     setbuf(stdin, NULL);
@@ -139,7 +124,9 @@ void cadastrar_usuario() {
     successful_message("Usuario criado com sucessso!");
 }
 
-void cadastrar_usuarios() {
+void cadastrar_multiplos_usuarios() {
+
+    printf("|---Cadastrar Multiplos Usuarios---|\n\n");
 
     uint8 quantity;
 
@@ -147,12 +134,15 @@ void cadastrar_usuarios() {
         setbuf(stdin, NULL);
         printf("| Digite a quantidade de usuarios desejadados (Maximo 10): ");
 
-        if (!scanf("%u", &quantity)) {
+        char input[2];
+        if (!scanf("%[^\n]s", &input)) {
             error_message("ocorreu um erro ao ler a quantidade de usarios");
             printf("Tente novamente -> ");
             clearBuffer();
             continue;
         }
+
+        quantity = strtoul(input, NULL, 10);
 
         if (clearBuffer()) {
             error_message("Quantidade inválida!");
@@ -169,9 +159,8 @@ void cadastrar_usuarios() {
     }
 
     for (uint8 i = 0; i<quantity; i++) {
-        printf("quantidade de usuarios: %d / %d \n", i, quantity);
+        printf("\n|----------------- Usuario %d/%d -----------------|\n\n", i+1, quantity);
         cadastrar_usuario();
-        printf("|-------------------------------------------------|\n");
     }
 
 }
@@ -182,7 +171,7 @@ void cadastrar_usuarios() {
  */
 void deletar_usuario() {
 
-    printf("|---Deletar usuario---|\n");
+    printf("|---Deletar usuario---|\n\n");
 
     if (bd.size == 0) {
         error_message("Nao ha usuarios cadastrados!");
@@ -204,7 +193,7 @@ void deletar_usuario() {
  */
 void buscar_usuario() {
 
-    printf("|---Busca de Usuario---|\n");
+    printf("|---Busca de Usuario---|\n\n");
 
     if (bd.size == 0) {
         error_message("Nao ha usuarios cadastrados!");
@@ -228,7 +217,7 @@ void buscar_usuario() {
  */
 void transferencia() {
 
-    printf("|---Transferencia---|\n");
+    printf("|---Transferencia---|\n\n");
 
     if (bd.size == 0) {
         error_message("Nao ha usuarios cadastrados!");
@@ -261,7 +250,7 @@ void transferencia() {
  */
 void deposito() {
 
-    printf("|---Deposito---|\n");
+    printf("|---Deposito---|\n\n");
 
     if (bd.size == 0) {
         error_message("Nao ha usuarios cadastrados!");
@@ -282,7 +271,7 @@ void deposito() {
  * @brief: trata da entrada, processamento e validação do procedimento de saque
  */
 void saque() {
-    printf("|---Saque---|\n");
+    printf("|---Saque---|\n\n");
 
     if (bd.size == 0) {
         error_message("Nao ha usuarios cadastrados!");
@@ -307,14 +296,23 @@ void saque() {
 /**
  * @brief: trata da leitura de valores monetarios
  * @param title: texto a ser exibido quando solicitado o valor
+ * @warning: valor maximo de leitura de 8 bytes
  * @return: valor monetario lido
  */
 double ler_valor(char* title) {
-    double value;
     while (true) {
+
+        char input[21];
+
         setbuf(stdin, NULL);
         printf("| %s ", title);
-        scanf("%lf", &value);
+        if (!scanf("%[^\n]s", &input)) {
+            error_message("ocorreu um erro ao ler o valor!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        const double value = strtod(input, NULL);
 
         if (clearBuffer() || value <= 0) {
             error_message("Quantia invalida!");
@@ -331,11 +329,18 @@ double ler_valor(char* title) {
  * @return: valor do id lido
  */
 uint64 ler_id() {
-    uint64 id;
     while (true) {
         setbuf(stdin, NULL);
         printf("| Digite o ID do usuario desejado: ");
-        scanf("%llu", &id);
+
+        char input[20];
+        if (!scanf("%[^\n]s", input)) {
+            error_message("ocorreu um erro ao ler o id!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        const uint64 id = strtoull(input, NULL, 10);
 
         if (clearBuffer()) {
             error_message("ID invalido!");
@@ -385,7 +390,7 @@ uint64 selecionar_usuario(char* title) {
  * @param id: id do usuario a ser verificado
  * @return: valor boolean indicando se existe o usuario (TRUE) ou nao (FALSE)
  */
-bool existe_usuario(uint64 id) {
+bool existe_usuario(const uint64 id) {
     bool exist = false;
     for (uint64 i = 0; i < bd.size; i++) {
         const User *user = getUserFromVector(&bd, i);
