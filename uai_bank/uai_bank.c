@@ -26,7 +26,7 @@ void cadastrar_usuario() {
     while (true) {
         printf("| Digite o nome completo do usuario: ");
 
-        if (!scanf("%[^\n]s", name)) {
+        if (!scanf("%s", name)) {
             error_message("ocorreu um erro ao ler o nome do usuario!");
             printf("Tente novamente -> ");
             continue;
@@ -37,6 +37,8 @@ void cadastrar_usuario() {
             printf("Tente novamente -> ");
             continue;
         }
+
+        name[100] = '\0';
 
         const uint8 size = strlen(name);
         if (size < 3) {
@@ -53,7 +55,7 @@ void cadastrar_usuario() {
     while (true) {
         setbuf(stdin, NULL);
 
-        char input[3];
+        char input[4];
         printf("| Digite a idade do usuario: ");
         if (!scanf("%[^\n]s", &input)) {
             error_message("ocorreu um erro ao ler a idade do usuario!");
@@ -61,9 +63,17 @@ void cadastrar_usuario() {
             continue;
         }
 
+        if (clearBuffer() || !isNumber(input)) {
+            error_message("Idade invalida!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        input[3] = '\0';
+
         age = strtoul(input, NULL, 10);
 
-        if (clearBuffer() ||age>120 || age<0) {
+        if (age>120 || age<0) {
             error_message("Idade invalida!");
             printf("Tente novamente -> ");
             continue;
@@ -131,11 +141,17 @@ void cadastrar_multiplos_usuarios() {
         setbuf(stdin, NULL);
         printf("| Digite a quantidade de usuarios desejadados (Maximo 10): ");
 
-        char input[2];
-        if (!scanf("%[^\n]s", &input)) {
+        char input[3];
+        if (!scanf("%s", &input)) {
             error_message("ocorreu um erro ao ler a quantidade de usarios");
             printf("Tente novamente -> ");
             clearBuffer();
+            continue;
+        }
+
+        if (!isNumber(input)) {
+            error_message("Quantidade invalida!");
+            printf("Tente novamente -> ");
             continue;
         }
 
@@ -143,6 +159,12 @@ void cadastrar_multiplos_usuarios() {
 
         if (clearBuffer()) {
             error_message("Quantidade inválida!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        if (quantity == 0) {
+            error_message("Quantidade invalida!");
             printf("Tente novamente -> ");
             continue;
         }
@@ -287,9 +309,15 @@ double ler_valor(char* title) {
             continue;
         }
 
+        if (clearBuffer() || !isDouble(input)) {
+            error_message("Quantia invalida!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
         const double value = strtod(input, NULL);
 
-        if (clearBuffer() || value <= 0) {
+        if (value <= 0) {
             error_message("Quantia invalida!");
             printf("Tente novamente -> ");
             continue;
@@ -307,6 +335,12 @@ uint64 ler_id() {
         char input[20];
         if (!scanf("%[^\n]s", input)) {
             error_message("ocorreu um erro ao ler o id!");
+            printf("Tente novamente -> ");
+            continue;
+        }
+
+        if (!isNumber(input)) {
+            error_message("ID invalido!");
             printf("Tente novamente -> ");
             continue;
         }

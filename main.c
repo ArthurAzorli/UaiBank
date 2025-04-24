@@ -5,6 +5,12 @@
 #include "uai_bank/uai_bank.h"
 #include "util/io_util.h"
 
+/**
+ * @by: Arthur Gagliardi Azorli
+ * @numero_usp: 16855452
+ */
+
+
 void print_menu() {
 
     printf("\n");

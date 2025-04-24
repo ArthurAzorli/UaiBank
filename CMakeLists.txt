@@ -19,6 +19,7 @@ add_library(Util SHARED
         util/io_util.h
         util/io_util.c
         util/int_util.h
+        util/int_util.c
 )
 
 add_library(User SHARED
