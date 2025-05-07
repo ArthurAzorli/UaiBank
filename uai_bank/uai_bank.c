@@ -26,7 +26,7 @@ void cadastrar_usuario() {
     while (true) {
         printf("| Digite o nome completo do usuario: ");
 
-        if (!scanf("%s", name)) {
+        if (!scanf("%[^\n]s", name)) {
             error_message("ocorreu um erro ao ler o nome do usuario!");
             printf("Tente novamente -> ");
             continue;
@@ -121,7 +121,7 @@ void cadastrar_usuario() {
     }
 
     if (init_balance) {
-        user.balance = ler_valor("| Digite o valor do saldo (separado com virgula): R$ ");
+        user.balance = ler_valor("Digite o valor do saldo (separado com virgula): R$ ");
     }
 
     setbuf(stdin, NULL);

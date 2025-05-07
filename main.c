@@ -92,7 +92,7 @@ int main() {
                 break;
             }
             default: {
-                error_message("Erro: Entrada invalida!\n");
+                error_message("Entrada invalida!\n");
                 break;
             }
         }

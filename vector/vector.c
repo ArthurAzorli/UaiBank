@@ -28,7 +28,7 @@ bool push_back(Vector* vector, const void *value) {
 
 }
 
-void * pop_back(Vector* vector) {
+void* pop_back(Vector* vector) {
 
     if (!vector->data || vector->size == 0) {
         return NULL;
@@ -51,7 +51,7 @@ void * pop_back(Vector* vector) {
     return oldValue;
 }
 
-void * remove_value(Vector* vector, const uint64 index) {
+void* remove_value(Vector* vector, const uint64 index) {
 
     if (!vector->data || vector->size == 0 ||index >= vector->size) {
         return NULL;

@@ -13,7 +13,7 @@ bool isNumber(const char *text) {
 
 bool isDouble(const char *text) {
     for (int i = 0; text[i] != '\0'; i++) {
-        if (!isdigit(text[i]) || text[i] != '.' || text[i] != ',') {
+        if (!isdigit(text[i]) && text[i] != ',') {
             return false;
         }
     }
