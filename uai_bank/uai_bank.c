@@ -212,16 +212,11 @@ void buscar_usuario() {
         return;
     }
 
-    const uint64 id = ler_id();
+    const uint64 index = selecionar_usuario("Selecione um Usuario");
+    User* user = getUserFromVector(&bd, index);
 
-    for (uint64 i = 0; i < bd.size; i++) {
-        const User* user = getUserFromVector(&bd, i);
-        if (user->id == id) {
-            printf("| nome: %s \n| idade: %u \n| saldo: R$ %.2lf \n",
-                user->name, user->age, user->balance);
-            break;
-        }
-    }
+    printf("| nome: %s \n| idade: %u \n| saldo: R$ %.2lf \n",
+    user->name, user->age, user->balance);
 }
 
 void transferencia() {

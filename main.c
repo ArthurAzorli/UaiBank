@@ -21,14 +21,14 @@ void print_menu() {
     printf("|=================================================|\n\n");
     printf("|---------------------OPTIONS---------------------|\n\n");
     printf("| [1] Cadastrar novo Usuario                      |\n");
-    printf("| [2] Cadastrar grupo de Usuarios                 |\n");
+    printf("| [2] Cadastrar multiplos Usuarios                |\n");
     printf("| [3] Deletar Usuario por ID                      |\n");
     printf("| [4] Buscar Usuario por ID                       |\n");
     printf("| [5] Realizar Transferencia                      |\n");
     printf("| [6] Realizar Deposito                           |\n");
     printf("| [7] Realizar Saque                              |\n");
     printf("| [8] Limpar Tela                                 |\n");
-    printf("| [9] Sair                                        |\n");
+    printf("| [9] Finalizar Programa                          |\n");
     printf("|-------------------------------------------------|\n\n");
     printf("| Digite a opcao desejada: ");
 }

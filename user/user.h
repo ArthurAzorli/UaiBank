@@ -3,7 +3,7 @@
 
 #include "../util/int_util.h"
 
-static uint64 NEXT_ID = 0x0;
+static uint64 NEXT_ID = 0x1;
 static const char* ID_PATH = "../id.txt";
 
 struct user_struct {

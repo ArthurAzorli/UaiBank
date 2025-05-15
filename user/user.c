@@ -43,5 +43,6 @@ void save_id() {
 }
 
 uint64 getNextID() {
+    if (NEXT_ID == 0) NEXT_ID = 1;
     return NEXT_ID;
 }
