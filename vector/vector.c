@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool
-push_back(Vector* vector, const void *value) {
-
+bool push_back(Vector* vector, const void *value) {
+ 
     if (!vector) return false;
 
     void** newData;
