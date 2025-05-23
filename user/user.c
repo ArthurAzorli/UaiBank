@@ -5,7 +5,7 @@
 #include <string.h>
 
 void init_user(User *user, char *name, uint8 age) {
-    if (NEXT_ID == 0) load_id();
+    load_id();
     user->id = NEXT_ID;
     strcpy(user->name, name);
     user->age = age;

@@ -10,7 +10,6 @@
  * @numero_usp: 16855452
  */
 
-
 void print_menu() {
 
     printf("\n");
